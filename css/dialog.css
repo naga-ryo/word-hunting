@@ -1,0 +1,49 @@
+#custom-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2147483647 !important;
+}
+
+#custom-dialog {
+    background: #252525;
+    color: white;
+    padding: 3vh 5vw;
+    border-radius: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0,0,0,0.8), inset 0 0.125vh 0.25vh rgba(255,255,255,0.7);
+    text-align: center;
+    max-width: 80%;
+    font-size: min(2.0vh, 3.5vw);
+}
+
+#custom-dialog-message {
+    color: white;
+}
+
+#custom-dialog-buttons {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+}
+
+#custom-dialog button {
+    background-color: rgb(224, 210, 17);
+    color: black !important;
+    border: none;
+    border-radius: 0.5vh;
+    padding: 1vh 4vw;
+    font-size: min(2.0vh, 3vw);
+    cursor: pointer;
+}
+
+#custom-dialog-cancel {
+    background-color: #888888 !important;
+    color: white !important;
+}

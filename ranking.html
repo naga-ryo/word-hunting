@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <title>ワードハンティング|ランキング</title>
+    <link rel="stylesheet" href="css/dialog.css" />
+    <link rel="stylesheet" href="css/loading.css" />
+    <link rel="stylesheet" href="css/ranking.css" />
+</head>
+<body>
+    <div id="top-logo">
+        <img src="images/title.png" alt="ワードハンティング" id="logo" draggable="false" oncontextmenu="return false;" ontouchstart="return false;">
+    </div>
+
+    <div id="account" onclick="accountCheck()">未ログイン</div>
+
+    <div id="container">
+        <div id="title">ランキング
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6" id="reload" onclick="reload();"><path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" id="reload-inner" /></svg>
+        </div>
+        <div id="list">
+
+            <button id="scroll-top-list" onclick="scrollTopLogList('smooth')">▲</button>
+        </div>
+
+        <button id="top-back" onclick="back()"><svg xmlns="http://www.w3.org/2000/svg" class="home-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg></button>
+    </div>
+
+    <div id="loading3" style="display: none;">
+        <button id="reset-loading" onclick="window.location.href='index.html'">中止</button>
+        <p id="long-loading" style="display: none;">少し時間がかかる場合があります<br>もう少々お待ちください</p>
+        <div class="square-move-2"></div>
+        <div id="mole-game-container" style="display: none;">
+            <p id="mole-game-title" style="color:white;">モグラ叩き</p>
+            <div id="moles-game">
+                <!-- モグラのマス -->
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+            </div>
+            <p id="score-display">スコア: 0</p>
+        </div>
+    </div>
+
+    <script src="js/dialog.js"></script>
+    <script src="js/mole.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/ranking.js"></script>
+</body>
+</html>

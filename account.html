@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <title>ワードハンティング|アカウント</title>
+    <link rel="stylesheet" href="css/dialog.css" />
+    <link rel="stylesheet" href="css/loading.css" />
+    <link rel="stylesheet" href="css/account.css" />
+</head>
+<body>
+    <div id="top-logo">
+        <img src="images/title.png" alt="ワードハンティング" id="logo" draggable="false" oncontextmenu="return false;" ontouchstart="return false;">
+    </div>
+
+    <div id="container">
+        <div id="title">アカウント設定</div>
+        <div id="no-account">
+            <div id="selection">
+                <div onclick="toSignIn()" class="active">ログイン</div>
+                <div onclick="toSignUp()">新規登録</div>
+            </div>
+            <div id="explanation">ユーザー名とパスワードを入力してください</div>
+            <label class="input">ユーザー名(本名禁止)<input type="text" id="username-input" placeholder="例：フクロウ"></label>
+            <label class="input">パスワード<input type="password" id="password-input" placeholder="例：password123"></label>
+            <button id="signin-button" onclick="checkSignIn()">ログイン</button>
+            <button id="signup-button" onclick="checkSignUp()" style="display: none;">新規登録</button>
+        </div>
+        <div id="has-account" style="display: none;">
+            <div id="selection2">
+                <div onclick="toInfo()" class="active">基本情報</div>
+                <div onclick="toSetting()">その他設定</div>
+            </div>
+            <div id="user-name-display"><span id="user-name">田中太郎</span> 様</div>
+            <div id="user-status">
+                <div id="level" class="loading">Loading<span>.</span><span>.</span><span>.</span></div>
+                <hr>
+                <div>プレイ回数：<span id="play-count">?</span>回</div>
+                <div>正解数:<span id="correct-count">?</span>回</div>
+                <div>正解率：<span id="correct-rate">?</span>%</div>
+                <div id="permissions">
+                    <div>
+                        <label class="switch">
+                        <input type="radio" name="permission" id="permission1" value="none">
+                        ランキングで一切の情報を非表示
+                        </label>
+                        <label class="switch">
+                        <input type="radio" name="permission" id="permission2" value="name">
+                        ランキングでユーザー名/レベルを表示
+                        </label>
+                        <label class="switch">
+                        <input type="radio" name="permission" id="permission3" value="accuracy">
+                        ランキングでユーザー名/レベル/正解率を表示
+                        </label>
+                    </div>
+                    <button id="permission-button" onclick="changeRankingPolicy()">反映させる</button>
+                </div>
+
+
+            </div>
+            <div id="user-setting" style="display: none;">
+                <div id="change-name">ユーザー名を変更する</div>
+                <input type="text" id="new-username-input" placeholder="新しいユーザー名を入力">
+                <button id="change-name-button" onclick="changeName()">変更</button>
+                <div id="change-password">パスワードを変更する</div>
+                <input type="password" id="new-password-input" placeholder="新しいパスワードを入力">
+                <button id="change-password-button" onclick="changePassword()">変更</button>
+                <div id="delete-account">アカウントを削除する</div>
+                <button id="delete-account-button" onclick="deleteAccount()">削除</button>
+            </div>
+            <button id="signout-button" onclick="signOut()">ログアウト</button>
+        </div>
+        <button id="top-back" onclick="topBack()"><svg xmlns="http://www.w3.org/2000/svg" class="home-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg></button>
+    </div>
+    <div id="loading3" style="display: none;">
+        <button id="reset-loading" onclick="window.location.reload()">中止</button>
+        <p id="long-loading" style="display: none;">少し時間がかかる場合があります<br>もう少々お待ちください</p>
+        <div class="square-move-2"></div>
+        <div id="mole-game-container" style="display: none;">
+            <p id="mole-game-title" style="color:white;">モグラ叩き</p>
+            <div id="moles-game">
+                <!-- モグラのマス -->
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+            </div>
+            <p id="score-display">スコア: 0</p>
+        </div>
+    </div>
+    <script src="js/dialog.js"></script>
+    <script src="js/mole.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/account.js"></script>
+</body>
+</html>

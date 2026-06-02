@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preload" as="image" href="images/smiler.png">
+    <link rel="preload" as="image" href="images/sadder.png">
+    <title>ワードハンティング|ゲーム画面</title>
+    <link rel="stylesheet" href="css/dialog.css" />
+    <link rel="stylesheet" href="css/loading.css" />
+    <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+    <div id="account">未ログイン</div>
+    <div id="top-logo">
+        <img src="images/title.png" alt="ワードハンティング" id="logo" draggable="false" oncontextmenu="return false;" ontouchstart="return false;">
+    </div>
+
+    <div id="window">
+        <div id="upper-buttons">
+            <button id="hint-button" onclick="getHint()">ヒントを使用</button>
+            <div id="timer">00:00</div>
+            <button id="quit" onclick="gameQuit()">中断する</button>
+        </div>
+
+        <div id="response-display">
+            <div id="comments">
+                <div class="response">私の思い浮かべているものを当ててください</div>
+                <div class="response">お題に関する質問をしてくれたら「はい」「いいえ」「部分的にそう」「たぶんそう」「たぶん違う」「そうでもない」「わかりません」のいずれかのみ答えます</div>
+                <div class="response">お題の文字数は平仮名で考えます</div>
+                <div id="check-answer-box" style="display: none;">
+                    <div id="check-answer-text1">正解は...</div>
+                    <div id="check-answer-text2"></div>
+                    <div id="check-answer-text3">でした！</div>
+                </div>
+            </div>
+            <img src="images/responser.png" alt="回答者" id="main-owl" draggable="false" oncontextmenu="return false;" ontouchstart="return false;">
+        </div>
+    </div>
+
+    <div id="buttons">
+        <button id="question-button" onclick="questionFormOpen()">質問する（残り<span id="question-remain"></span>回まで）</button>
+        <button id="answer-button" onclick="answerFormOpen()">解答する（一回限り）</button>
+    </div>
+
+    <div id="question-form" style="display: none;">
+        <p id="question-text">質問を入力してください</p>
+        <input type="text" id="question-input" placeholder="例：それは〜なものですか">
+        <button id="question-confirmed" onclick="questionAdd()">決定</button>
+        <button id="question-back" onclick="questionFormClose()">戻る</button>
+    </div>
+
+    <div id="answer-form" style="display: none;">
+        <p id="answer-text">解答を全て<span style="color: red;;">ひらがな</span>で入力してください</p>
+        <input type="text" id="answer-input" placeholder="例：ふくろう">
+        <button id="answer-confirmed" onclick="answerCheck()">決定</button>
+        <button id="answer-back" onclick="answerFormClose()">戻る</button>
+    </div>
+
+    <div id="result" style="display: none;">
+        <div id="final-answer">あなたの解答：<span id="checked-answer"></span></div>
+        <div id="SorF"></div>
+        <div id="last-message">また遊んでね</div>
+        <button id="finish-button" onclick="finishGame()">終了</button>
+    </div>
+
+    <div id="loading3">
+        <button id="reset-loading" onclick="window.location.href = 'index.html'">中止</button>
+        <p id="long-loading" style="display: none;">少し時間がかかる場合があります<br>もう少々お待ちください</p>
+        <div class="square-move-2"></div>
+        <div id="mole-game-container" style="display: none;">
+            <p id="mole-game-title" style="color:white;">モグラ叩き</p>
+            <div id="moles-game">
+                <!-- モグラのマス -->
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+                <div class="mole-cell"></div>
+            </div>
+            <p id="score-display">スコア: 0</p>
+        </div>
+    </div>
+
+    <script src="js/dialog.js"></script>
+    <script src="js/mole.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/comment.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+* {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #663100;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#top-logo {
+    width: 100%;
+    display: flex;
+    margin-top: 1vh;
+    justify-content: center;
+}
+
+#logo {
+    width: min(60vh, 50vw);
+    max-width: 400px;
+    filter: drop-shadow(0.2vh 0.2vh 0.4vh rgba(255, 255, 255, 0.5));
+}
+
+#container {
+    color: white;
+    font-size: min(2.0vh, 3.5vw);
+    width: 90%;
+    height: auto;
+    margin-top: 2vh;
+    margin-bottom: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #252525;
+    border: none;
+    border-radius: 1vh;
+    box-shadow: 
+        0 0.25vh 0.5vh rgba(0,0,0,0.7),     /* 外側の影 */
+        inset 0 0.125vh 0.25vh rgba(255,255,255,0.7); /* 内側の光 */
+}
+
+#title {
+    font-size: min(3.0vh, 4vw);
+    margin: 1vh 0;
+    color: white;
+}
+
+#no-account, #has-account {
+    color: black;
+    width: 100%;
+    height: 60vh;
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+#selection, #selection2 {
+    color: black;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    font-size: min(1.5vh, 2.0vw);
+    background-color: rgb(147, 147, 147);
+}
+
+#selection div, #selection2 div {
+    padding: 1vh 0;
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.active{
+    background-color: #f1f1f1;
+}
+
+#explanation {
+    font-size: min(2.0vh, 2.5vw);
+    margin: 8vh 0 6vh 0;
+    width: min(80%, 60vh);
+    max-width: 400px;
+    text-align: center;
+}
+
+.input{
+    width: 80%;
+    font-size: min(2.0vh, 2.5vw);
+    margin: 1vh 0;
+}
+
+#username-input, #password-input {
+    font-size: max(min(2.0vh, 2.5vw), 16px);
+    padding: 0.5vh 1vw;
+    margin: 1vh 0;
+    width: 100%;
+    border: none;
+    border-radius: 0.5vh;
+    box-shadow: 0 0.25vh 0.5vh rgba(0,0,0,0.7);
+}
+
+#signin-button, #signup-button {
+    font-size: min(2.0vh, 2.5vw);
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 0.5vh;
+    padding: 0.5vh 3vw;
+    margin: 7vh 0;
+    cursor: pointer;
+}
+
+.loading span {
+    animation: blink 1.5s infinite;
+    opacity: 0;
+}
+
+.loading span:nth-child(1) {
+    animation-delay: 0s;
+}
+.loading span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.loading span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+#user-name-display {
+    font-size: min(2.0vh, 3.5vw);
+    border: none;
+    border-radius: 0.5vh;
+    padding: 0.5vh 3vw;
+    margin: 2vh 0 1vh 0;
+}
+
+#user-status, #user-setting{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    width: 80%;
+    padding: 2vh 0;
+    margin: 1vh 0 3vh 0;
+    border: none;
+    border-radius: 1vh;
+    gap: 2vh;
+}
+
+#permissions{
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #676767 0.1vh solid;
+    border-radius: 0.5vh;
+    padding: 1vh 0.5vw;
+    background-color: #fffff1;
+}
+
+#permissions::after {
+    content: "";
+    position: absolute;
+    border: none;
+    border-radius: 0.25vh;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(0.25vh);
+    -webkit-backdrop-filter: blur(0.25vh);
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+#permissions.show::after {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.switch {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4em;
+    font-size: min(1.5vh, 2.5vw);
+}
+
+#permission-button{
+    margin-top: 0.5vh;
+    color: rgb(79, 79, 79);
+    font-size: min(1.5vh, 2.5vw);
+    padding: 0.25vh 1vw;
+    background-color: rgb(238, 255, 0);
+    border: solid 0.0125vh black;
+    border-radius: 0.25vh;
+}
+
+#new-username-input, #new-password-input{
+    font-size: max(min(2.0vh, 2.5vw), 16px);
+    padding: 0.25vh 1vw;
+    margin: 0;
+    width: 80%;
+    border: none;
+    border-radius: 0.5vh;
+    box-shadow: 0 0.25vh 0.5vh rgba(0,0,0,0.7);
+}
+
+#change-name-button, #change-password-button{
+    color: black;
+    font-size: min(2.0vh, 2.5vw);
+    background-color: rgb(224, 210, 17);
+    border: none;
+    border-radius: 0.5vh;
+    padding: 0.3vh 3vw;
+    margin: 0;
+}
+
+#delete-account-button{
+    color: rgb(255, 255, 255);
+    font-size: min(1.5vh, 2.0vw);
+    background-color: rgb(224, 17, 17);
+    border: none;
+    border-radius: 0.5vh;
+    padding: 0.25vh 2vw;
+    margin: 0;
+}
+
+#signout-button {
+    color: white;
+    font-size: min(2.0vh, 2.5vw);
+    background-color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 0.5vh;
+    padding: 0.5vh 3vw;
+}
+
+#top-back {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0.5vh;
+    padding: 0.5vh 3vw 0 3vw;
+    margin: 1vh 0;
+}
+
+.home-icon {
+    width:  min(3vh, 4vw);
+    height: min(3vh, 4vw);
+}
+
+button{
+    color: black;
+}

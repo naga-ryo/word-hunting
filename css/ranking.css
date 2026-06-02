@@ -1,0 +1,197 @@
+* {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #663100;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#account {
+    position: absolute;
+    top: 1vh;
+    right: 2vw;
+    color: white;
+    font-size: min(1.5vh, 2.0vw);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5vh 1vw;
+    border-radius: 0.25vh;
+    box-shadow: 
+        0 0.25vh 0.5vh rgba(0,0,0,0.7),     /* 外側の影 */
+        inset 0 0.125vh 0.25vh rgba(255,255,255,0.7); /* 内側の光 */
+    cursor: pointer;
+}
+
+#top-logo {
+    width: 100%;
+    display: flex;
+    margin-top: 1vh;
+    justify-content: center;
+}
+
+#logo {
+    width: min(60vh, 50vw);
+    max-width: 400px;
+    filter: drop-shadow(0.2vh 0.2vh 0.4vh rgba(255, 255, 255, 0.5));
+}
+
+#container {
+    color: white;
+    font-size: min(2.0vh, 3.5vw);
+    width: 90%;
+    height: auto;
+    margin-top: 2vh;
+    margin-bottom: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #9d9a00;
+    border: none;
+    border-radius: 1vh;
+    box-shadow:
+        0 0.6vh 1.2vh rgba(0,0,0,0.6),
+        inset 0 0.3vh 0.6vh rgba(255,255,255,0.7);
+}
+
+#title {
+    width: 100%;
+    position: relative;
+    font-size: min(3.0vh, 4vw);
+    margin: 1vh 0;
+    color: white;
+    text-align: center;
+}
+
+#reload{
+    position: absolute;
+    height: 100%;
+    right: 2vw;
+    padding: 0.2vh;
+    border: #ffffff 0.2vh solid;
+    border-radius: 0.5vh;
+}
+
+.reload-inner {
+    display: inline-block;
+    animation: spin 1.2s linear infinite;
+    transform-origin: center center;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+#list {
+    position: relative;
+    color: black;
+    width: 100%;
+    height: 60vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+#list::after {
+    content: "";
+    position: absolute;
+    border: none;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(0.25vh);
+    -webkit-backdrop-filter: blur(0.25vh);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100;
+    transition: opacity 0.3s;
+}
+
+#list.veiled::after {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* スクロールバー装飾 */
+#list::-webkit-scrollbar {
+    width: 0.8vw;
+}
+#list::-webkit-scrollbar-thumb {
+    background-color: #9d9a00;
+    border-radius: 1vh;
+}
+
+.session-card {
+    position: relative;
+    width: 70vw;
+    padding: 1vh;
+    margin: 1vh 0;
+    background-color: rgb(255, 252, 228);
+    border-radius: 1vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #9d9a00 double 0.5vh;
+    box-shadow:
+        0 0.4vh 0.8vh rgba(0,0,0,0.3),
+        inset 0 0.4vh 0.8vh rgba(255,255,255,0.8);
+}
+
+.session-info {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p{
+    font-size: min(2.0vh, 3.0vw);
+    margin: 0.5vh 0;
+    color: #2f2f2f;
+}
+
+#scroll-top-list {
+    position: absolute;
+    bottom: 2vh;
+    left: 1vw;
+    z-index: 10;
+    font-size: min(1.5vh, 2.0vw);
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: min(1vh, 1.5vw) min(1.5vh, 2.0vw);
+    cursor: pointer;
+    opacity: 0;
+}
+
+#scroll-top-list.show {
+    opacity: 1;
+}
+
+#top-back {
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0.5vh;
+    padding: 0.5vh 3vw 0 3vw;
+    margin: 1vh 0;
+}
+
+.home-icon {
+    width:  min(3vh, 4vw);
+    height: min(3vh, 4vw);
+}
+
+button{
+    color: black;
+}

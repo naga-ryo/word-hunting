@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preload" as="image" href="images/title.png">
+    <link rel="preload" as="image" href="images/responser.png">
+    <title>ワードハンティング</title>
+    <link rel="stylesheet" href="css/dialog.css" />
+    <link rel="stylesheet" href="css/loading.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <img src="images/crow.png" alt="カラスの画像" id="crow" draggable="false" oncontextmenu="return false;" ontouchstart="return false;">
+
+    <div id="account" onclick="accountCheck()">未ログイン</div>
+    <div id="floating-help" role="button" aria-label="プレイ方法を表示" tabindex="0">
+      ❓
+    </div>
+    <img src="images/title.png" alt="ワードハンティング" id="title" draggable="false" oncontextmenu="return false;" ontouchstart="return false;">
+    <div class="shine-container">
+      <img src="images/responser.png" alt="メインキャラクター" id="owl" draggable="false" oncontextmenu="return false;" ontouchstart="return false;">
+    </div>
+
+    <button id="start-button" onclick="gameStart()">ゲーム開始</button>
+    <div id="buttons">
+      <button id="log-button" onclick="checkLog()">みんなの履歴</button>
+      <button id="ranking-button" onclick="checkRanking()">ランキング</button>
+    </div>
+    <button id="account-button" onclick="accountCheck()">アカウント設定</button>
+    <button id="terms-button" onclick="checkTerms()">利用規約及びプライバシーポリシー</button>
+
+    <div id="modal">
+        <div id="modal-container">
+            <div id="modal-close" onclick="modalClose()">×</div>
+            <div id="modal-content">
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">🎮 ゲーム内容</p>
+                  <div class="accordion-body closed">
+                    <p>1. フクロウが考えた<span style="color: rgb(218, 0, 0);">お題（名詞）を当てるゲーム</span>です！<br>（10%の確率で難しめのお題が出ます）</p>
+                    <p>2. フクロウに<span style="color: rgb(22, 0, 218);">お題に関する質問を</span>して「はい/いいえ/部分的にそう/たぶんそう/そうでもない/たぶん違う/わからない」という回答を得ることが<span style="color: rgb(22, 0, 218);">30回までできます</span>。</p>
+                    <p>3. お題が分かったら『解答する』ボタンから解答を入力してください！</p>
+                    <p>4. ヒントを使用すると『〜番目の文字は「~」です』という情報をゲットできます！<br>（ログインユーザーは<span style="color: rgb(22, 0, 218);">ヒント使用により正解時の正解数が0.5になる</span>ことに注意！）</p>
+                    <p>5. <span style="color: rgb(218, 0, 0);">リロードは不正操作扱いで強制終了</span>になります。</p>
+                    <p>6. <span style="color: rgb(218, 0, 0);">開始から約1時間経過しても強制終了</span>で正常に解答できなくなるためご注意ください。</p>
+                    <p>＊ 注意事項をチェック</p>
+                  </div>
+                </div>
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">💡 正解のためのコツ</p>
+                  <div class="accordion-body closed">
+                    <p>1. <span style="color: rgb(22, 0, 218);">最初は大まかなカテゴリから特定</span>していってどんどん絞っていくのが定石です！<br>例：「それは動物ですか」→「それは四足歩行ですか」</p>
+                    <p>2. 不適切な回答が来ないように<span style="color: rgb(218, 0, 0);">質問内容は出来るだけ客観的で答えやすいもの</span>にしましょう！<br>例：❌「それは大きいですか」 ⭕️「それは片手で持てますか」</p>
+                    <p>3. 「みんなの履歴」を見ましょう！実は<span style="color: rgb(22, 0, 218);">直近30個のお題は非常に出にくい</span>です。また、出題にはそれなりの偏りがあるので<span style="color: rgb(22, 0, 218);">頻出のお題を覚えておく</span>のも有効です！</p>
+                    <p>4. 質問に対する回答で間違った思い込みなどをしないように気をつけましょう！<br>例：「それは無機物ですか」→「いいえ」→スポーツ名などもあるので有機物とは限らない</p>
+                    <p>5. とにかく<span style="color: rgb(218, 0, 0);">ひらがなでの文字数を確認</span>してみるのも正解への道筋になるかも。<br>（ひらがな以外での文字数は答えてくれません。また、〜字以上/以下というような質問にも弱いです。）</p>
+                  </div>
+                </div>
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">📋 プレイ履歴について</p> 
+                  <div class="accordion-body closed">
+                    <p>1. 「みんなの履歴」ページでは最近のプレイ順と頻出のお題順でみんなのこれまでの履歴が確認できます！</p>
+                    <p>2. <span style="color: rgb(22, 0, 218);">プレイ内容</span>に関する情報は<span style="color: rgb(22, 0, 218);">履歴として保存</span>されます。</p>
+                    <p>3. 履歴には<span style="color: rgb(218, 0, 0);">個人を特定できる情報は一切含まれません</span>が公開される点をご理解ください。</p>
+                    <p>4. 質問内容の履歴はログインしているユーザーだけ見ることができます</p>
+                    <p>5. <span style="color: rgb(22, 0, 218);">履歴は</span>内容が不適切であること等の理由で管理者が<span style="color: rgb(22, 0, 218);">編集/削除する可能性</span>があります。</p>
+                  </div> 
+                </div>
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">👑 ランキングについて</p>
+                  <div class="accordion-body closed">
+                    <p>1. 「ランキング」ページでは<span style="color: rgb(22, 0, 218);">正解数を元にしたプレーヤーの順位</span>を見ることができます！</p>
+                    <p>2. ランキングでは<span style="color: rgb(218, 0, 0);">各プレイヤーの名前、レベル、正解率が掲載</span>されています！<br>（正解率は非公開の可能性があります）</p>
+                    <p>3. ランキングには<span style="color: rgb(22, 0, 218);">掲載を許可したプレイヤーのみが載っている</span>ため順位は全プレイヤーを対象にしたものではありません。</p>
+                    <p>4. 正解数が同じ場合は正解率の大きい順となりますが、正解率も同じだった場合は無作為に順位の上下が決まります。</p>
+                  </div>
+                </div>
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">👤 アカウントについて</p>
+                  <div class="accordion-body closed">
+                    <p>1. 必要なのはユーザー名とパスワードのみで、<span style="color: rgb(22, 0, 218);">メールアドレスなどの個人情報は一切不要</span>です！</p>
+                    <p>2.アカウントを作成するとこれまでの<span style="color: rgb(218, 0, 0);">プレイ回数と正解数を保存</span>でき、正解数が増えていくと<span style="color: rgb(218, 0, 0);">レベルが上がっていきます！</span><br>（プレイ履歴とアカウントが紐づいたりはしません）</p>
+                    <p>3. <span style="color: rgb(22, 0, 218);">ランキングへの掲載はデフォルトではされない設定</span>になっていますので適宜変更してください！</p>
+                    <p>4. ユーザー名、パスワードは自由に変更することができ、アカウントの削除もいつでもできます。</p>
+                    <p>5. アカウントのレベルは以下の基準に従って上がっていきます。</p>
+                    <p style="font-weight: bold;">🏆 レベル一覧</p>
+                    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; text-align: center; width: 100%;">
+                      <thead>
+                        <tr style="background-color: #f0f0f0;">
+                          <th>正解数</th>
+                          <th>レベル</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>0～2</td><td>Lv.1 見習いハンター</td></tr>
+                        <tr><td>3～4</td><td>Lv.2 ひよっこハンター</td></tr>
+                        <tr><td>5～9</td><td>Lv.3 若きハンター</td></tr>
+                        <tr><td>10～19</td><td>Lv.4 中堅ハンター</td></tr>
+                        <tr><td>20～29</td><td>Lv.5 熟練ハンター</td></tr>
+                        <tr><td>30～39</td><td>Lv.6 エリートハンター</td></tr>
+                        <tr><td>40～59</td><td>Lv.7 伝説のワードハンター</td></tr>
+                        <tr><td>60～79</td><td>Lv.8 究極のワードハンター</td></tr>
+                        <tr><td>80～99</td><td>Lv.9 ワードハンティング王</td></tr>
+                        <tr><td>100以上</td><td>Lv.10 ワードハンティング超越者</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">⚠️ 注意事項</p>
+                  <div class="accordion-body closed">
+                    <p>1. 本ゲームの回答はAIが自動生成したものであり、正確性や完全性を保証するものではありません。</p>
+                    <p>2. 通信状況や端末環境によりゲームが正常に動作しない場合があります。</p>
+                    <p>3. サービス内容は予告なく変更・停止・終了する場合があります。また、履歴やアカウント情報はサーバー障害等により失われる可能性があります。</p>
+                    <p>4. 本サービスの利用により発生した損害や不利益について、運営は一切責任を負いません。</p>
+                  </div>
+                </div>
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">📮 ご意見ポスト</p>
+                  <div class="accordion-body closed">
+                    <p>匿名でご意見・ご感想などを送っていただけます！指定の返信先がなければ頂いた内容には返信できませんが、今後の改善の参考にさせていただきます！</p>
+                    <form id="opinion-form">
+                      <textarea id="opinion-text" placeholder="匿名で記述"></textarea>
+                      <button type="submit" id="opinion-submit">送信</button>
+  
+                      <p id="opinion-status" class="opinion-status">送信ありがとうございました！</p>
+                    </form>
+                  </div>
+                </div>
+                <div class="divided-modal-content accordion-item">
+                  <p class="accordion-header" style="font-weight: bold;">🏁 最後に</p>  
+                  <div class="accordion-body closed">
+                    <p>説明を読んでいだだきありがとうございます！</p>
+                    <p>さぁ、どんなお題が出るか…お楽しみに！</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading3" style="display: none;">
+      <button id="reset-loading" onclick="window.location.reload()">中止</button>
+      <div class="square-move-2"></div>
+    </div>
+
+    <script src="js/dialog.js"></script>
+    <script src="js/crow.js"></script>
+    <script src="js/opinion.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
