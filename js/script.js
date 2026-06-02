@@ -11,7 +11,7 @@ async function acceptTerms(){
     if(localStorage.getItem("acceptedTerms") === "true"){
         return true;
     }else{
-        if(await customConfirm("利用規約及びプライバシーポリシーに同意しますか？\n※同意しないと利用できません。")){
+        if(await customConfirm("利用規約及びプライバシーポリシーに同意しますか？")){
             localStorage.setItem("acceptedTerms", "true");
             return true;
         }else{

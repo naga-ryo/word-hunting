@@ -14,36 +14,72 @@
 #custom-dialog {
     background: #252525;
     color: white;
-    padding: 3vh 5vw;
+    padding: 4vh 5vw 3vh 5vw;
     border-radius: 1vh;
     box-shadow: 0 0.5vh 1vh rgba(0,0,0,0.8), inset 0 0.125vh 0.25vh rgba(255,255,255,0.7);
     text-align: center;
-    max-width: 80%;
+    width: 85%;
+    max-width: 600px;
     font-size: min(2.0vh, 3.5vw);
 }
 
 #custom-dialog-message {
     color: white;
+    margin-bottom: 4vh;
+    line-height: 1.5;
 }
 
 #custom-dialog-buttons {
-    margin-top: 2vh;
     display: flex;
     justify-content: center;
     gap: 4vw;
+    width: 100%;
 }
 
 #custom-dialog button {
+    flex: 1;
     background-color: rgb(224, 210, 17);
     color: black !important;
     border: none;
     border-radius: 0.5vh;
-    padding: 1vh 4vw;
+    padding: 1.5dvh 0;
     font-size: min(2.0vh, 3vw);
+    font-weight: bold;
     cursor: pointer;
 }
 
 #custom-dialog-cancel {
     background-color: #888888 !important;
     color: white !important;
+}
+
+#custom-dialog.theme-light {
+    background: #FFFBF0;
+    color: #333333;
+    box-shadow: 0 0.5vh 1vh rgba(0,0,0,0.3), inset 0 0 0 0.5vh #F0D080; /* ポップな太枠 */
+}
+
+#custom-dialog.theme-light #custom-dialog-message {
+    color: #333333;
+    font-weight: bold; 
+}
+
+#custom-dialog.theme-light button#custom-dialog-ok {
+    background-color: #FF8C00;
+    color: white !important;
+    box-shadow: 0 0.4vh 0 #CC7000;
+}
+
+#custom-dialog.theme-light button#custom-dialog-ok:active {
+    box-shadow: 0 0 0 #CC7000;
+}
+
+#custom-dialog.theme-light button#custom-dialog-cancel {
+    background-color: #B0B0B0 !important;
+    color: white !important;
+    box-shadow: 0 0.4vh 0 #888888 !important;
+}
+
+#custom-dialog.theme-light button#custom-dialog-cancel:active {
+    box-shadow: 0 0 0 #888888 !important;
 }

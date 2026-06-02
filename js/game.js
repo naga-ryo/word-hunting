@@ -68,7 +68,7 @@ let usedHint = false;
 
 async function getHint() {
     if (usedHint) {
-        await customAlert("ヒントは使用済みです");
+        await customAlert("ヒントは使用済みです", "light");
         return;
     }
 
@@ -76,7 +76,7 @@ async function getHint() {
     if(localStorage.getItem("id")){
         caution = "\n＊正解時の正解数が0.5になります";
     }
-    if (await customConfirm("本当にヒントを使用しますか？" + caution)) {
+    if (await customConfirm("本当にヒントを使用しますか？" + caution, "light")) {
         try {
             questionFormClose();
             answerFormClose();
@@ -162,16 +162,16 @@ async function questionAdd(){
     const question = document.getElementById("question-input");
 
     if(question.value === ""){
-        await customAlert("質問を入力してください")
+        await customAlert("質問を入力してください", "light")
         return;
     }
 
     if(question.value.length > 50){
-        await customAlert("質問は50文字以内にしてください")
+        await customAlert("質問は50文字以内にしてください", "light")
         return;
     }
 
-    const result = await customConfirm("本当にこの内容で質問しますか？");
+    const result = await customConfirm("本当にこの内容で質問しますか？", "light");
     if (!result) {
         return;
     }
@@ -243,11 +243,11 @@ async function questionCheck(){
 async function answerCheck(){
     const re = /^[\p{Script=Hiragana}\u30FC]+$/u;
     if(!re.test(document.getElementById("answer-input").value.trim())){
-        await customAlert("解答はひらがなで入力してください");
+        await customAlert("解答はひらがなで入力してください", "light");
         return;
     }
 
-    const result = await customConfirm("本当にこの内容で解答しますか？");
+    const result = await customConfirm("本当にこの内容で解答しますか？", "light");
     if (!result) {
         return;
     }

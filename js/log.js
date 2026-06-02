@@ -147,7 +147,7 @@ async function loadMoreHistory() {
         const sessions = await getRecentSessionsWithQuestions(lastFetchedAt, pageSize, localStorage.getItem("id"));
 
         if (!sessions || sessions.length === 0) {
-            await customAlert("これ以上の履歴はありません。");
+            await customAlert("これ以上の履歴はありません。", "light");
             document.getElementById("load-more-button").disabled = true;
             return;
         }
@@ -207,7 +207,7 @@ async function modalOpen(targetId) {
         }
         modal.classList.add('is-active');
     }else{
-        await customAlert("質問内容はログインしていないと見られません。");
+        await customAlert("質問内容はログインしていないと見られません。", "light");
     }
 }
 

@@ -11,12 +11,12 @@ form.addEventListener("submit", async (e) => {
 
     const message = textArea.value.trim();
     if (!message) {
-        await customAlert("内容を入力してください。");
+        await customAlert("内容を入力してください。", "light");
         return;
     }
 
     // ✅ 送信前に確認ダイアログを表示
-    const isConfirmed = await customConfirm("この内容を送信します。よろしいですか？");
+    const isConfirmed = await customConfirm("この内容を送信します。よろしいですか？", "light");
     if (!isConfirmed) {
         return; // キャンセルされたら何もしない
     }
