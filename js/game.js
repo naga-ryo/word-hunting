@@ -1,9 +1,9 @@
 let loadingTimeout = null;
 
 function startLoading() {
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     loadingTimeout = setTimeout(() => {
-        document.getElementById("long-loading").style.display = "block";
+        document.getElementById("long-loading-message").style.display = "block";
         document.getElementById("mole-game-container").style.display = "flex";
     }, 4000);
 }
@@ -12,8 +12,8 @@ function stopLoading() {
     clearTimeout(loadingTimeout);
     loadingTimeout = null;
 
-    document.getElementById("loading3").style.display = "none";
-    document.getElementById("long-loading").style.display = "none";
+    document.getElementById("fundamental-loading").style.display = "none";
+    document.getElementById("long-loading-message").style.display = "none";
     document.getElementById("mole-game-container").style.display = "none";
 }
 
@@ -87,7 +87,7 @@ async function getHint() {
             const comment = document.createElement("span");
             comment.textContent = "・";
             newComment.classList.add("hint");
-            newComment.classList.add("loading");
+            newComment.classList.add("loading-for-comments");
             for (let i = 0; i < 5; i++) {
                 const clone = comment.cloneNode(true);
                 newComment.appendChild(clone);
@@ -209,7 +209,7 @@ function responseAdd(){
     const comment = document.createElement("span");
     comment.textContent = "・";
     newComment.classList.add("response");
-    newComment.classList.add("loading");
+    newComment.classList.add("loading-for-comments");
     for (let i = 0; i < 5; i++) {
         const clone = comment.cloneNode(true);
         newComment.appendChild(clone);
@@ -267,7 +267,7 @@ async function answerCheck(){
     newComment.textContent = "解答確認中";
     const comment = document.createElement("span");
     comment.textContent = ".";
-    newComment.classList.add("loading2");
+    newComment.classList.add("loading-for-answer");
     for (let i = 0; i < 3; i++) {
         const clone = comment.cloneNode(true);
         newComment.appendChild(clone);
@@ -347,13 +347,13 @@ function showAnswerResult(isCorrect) {
 }
 
 function finishGame(){
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "index.html";
 }
 
 function loginCheck(){
     if(localStorage.getItem("account")){
-        document.getElementById("account").textContent = localStorage.getItem("account");
+        document.getElementById("account").textContent = "ログイン中";
     }
 }
 

@@ -25,7 +25,7 @@ async function gameStart(){
         return;
     }
 
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     localStorage.setItem("reload", "none");
     window.location.href = "game.html";
 }
@@ -34,7 +34,7 @@ async function checkLog(){
     if(!await acceptTerms()){
         return;
     }
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "log.html";
 }
 
@@ -42,7 +42,7 @@ async function checkRanking(){
     if(!await acceptTerms()){
         return;
     }
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "ranking.html";
 }
 
@@ -50,18 +50,18 @@ async function accountCheck(){
     if(!await acceptTerms()){
         return;
     }
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "account.html";
 }
 
 function checkTerms(){
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "terms.html";
 }
 
 function loginCheck(){
     if(localStorage.getItem("account")){
-        document.getElementById("account").textContent = localStorage.getItem("account");
+        document.getElementById("account").textContent = "ログイン中";
     }
 }
 

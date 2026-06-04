@@ -1,9 +1,9 @@
 let loadingTimeout = null;
 
 function startLoading() {
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     loadingTimeout = setTimeout(() => {
-        document.getElementById("long-loading").style.display = "block";
+        document.getElementById("long-loading-message").style.display = "block";
         document.getElementById("mole-game-container").style.display = "flex";
     }, 4000);
 }
@@ -12,8 +12,8 @@ function stopLoading() {
     clearTimeout(loadingTimeout);
     loadingTimeout = null;
 
-    document.getElementById("loading3").style.display = "none";
-    document.getElementById("long-loading").style.display = "none";
+    document.getElementById("fundamental-loading").style.display = "none";
+    document.getElementById("long-loading-message").style.display = "none";
     document.getElementById("mole-game-container").style.display = "none";
 }
 
@@ -64,7 +64,6 @@ async function updateStatus() {
         const stats = await retryOperation(() => fetchAccountStats(id));
         if (!stats || !stats.success) {
             await customAlert("アカウント情報を取得できませんでした");
-            updateLevel(null);
             return;
         }
         const playCount = stats.play_count;
@@ -257,7 +256,7 @@ async function changePassword(){
     }
 }
 
-async function deleteAccount(){
+async function executeDeleteAccount(){
     if(await customConfirm("アカウントを削除しますか？")){
         if(await customConfirm("本当にアカウントを削除しますか？\nアカウントを削除するとこれまでのプレイ履歴も全て削除されます。")){
             startLoading();

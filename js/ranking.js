@@ -1,9 +1,9 @@
 let loadingTimeout = null;
 
 function startLoading() {
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     loadingTimeout = setTimeout(() => {
-        document.getElementById("long-loading").style.display = "block";
+        document.getElementById("long-loading-message").style.display = "block";
         document.getElementById("mole-game-container").style.display = "flex";
     }, 4000);
 }
@@ -12,20 +12,20 @@ function stopLoading() {
     clearTimeout(loadingTimeout);
     loadingTimeout = null;
 
-    document.getElementById("loading3").style.display = "none";
-    document.getElementById("long-loading").style.display = "none";
+    document.getElementById("fundamental-loading").style.display = "none";
+    document.getElementById("long-loading-message").style.display = "none";
     document.getElementById("mole-game-container").style.display = "none";
     document.getElementById("list").classList.remove("veiled");
     document.getElementById("reload-inner").classList.remove("reload-inner");
 }
 
 function accountCheck(){
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "account.html";
 }
 
 function back(){
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "index.html";
 }
 
@@ -47,11 +47,23 @@ function makeRanking(users) {
         const userInfo = document.createElement("div");
         userInfo.classList.add("session-info");
 
-        userInfo.innerHTML = `
-            <p>${ranking}位: <span class="user-name">${name}</span></p>
-            <p style="color: rgb(205, 0, 0);"> ${level}</p>
-            <p>正解率: ${accuracy}</p>
-        `;
+        const p1 = document.createElement("p");
+        p1.textContent = `${ranking}位: `;
+        const span = document.createElement("span");
+        span.className = "user-name";
+        span.textContent = name;
+        p1.appendChild(span);
+
+        const p2 = document.createElement("p");
+        p2.style.color = "rgb(205, 0, 0)";
+        p2.textContent = level;
+
+        const p3 = document.createElement("p");
+        p3.textContent = `正解率: ${accuracy}`;
+
+        userInfo.appendChild(p1);
+        userInfo.appendChild(p2);
+        userInfo.appendChild(p3);
         ranking++;
 
         card.appendChild(userInfo);
@@ -156,7 +168,7 @@ loadInitialHistory();
 
 function loginCheck(){
     if(localStorage.getItem("account")){
-        document.getElementById("account").textContent = localStorage.getItem("account");
+        document.getElementById("account").textContent = "ログイン中";
     }
 }
 

@@ -1,9 +1,9 @@
 let loadingTimeout = null;
 
 function startLoading() {
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     loadingTimeout = setTimeout(() => {
-        document.getElementById("long-loading").style.display = "block";
+        document.getElementById("long-loading-message").style.display = "block";
         document.getElementById("mole-game-container").style.display = "flex";
     }, 4000);
 }
@@ -12,8 +12,8 @@ function stopLoading() {
     clearTimeout(loadingTimeout);
     loadingTimeout = null;
 
-    document.getElementById("loading3").style.display = "none";
-    document.getElementById("long-loading").style.display = "none";
+    document.getElementById("fundamental-loading").style.display = "none";
+    document.getElementById("long-loading-message").style.display = "none";
     document.getElementById("mole-game-container").style.display = "none";
     document.getElementById("log-list").classList.remove("veiled");
     document.getElementById("log-list2").classList.remove("veiled");
@@ -21,12 +21,12 @@ function stopLoading() {
 }
 
 function accountCheck(){
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "account.html";
 }
 
 function back(){
-    document.getElementById("loading3").style.display = "flex";
+    document.getElementById("fundamental-loading").style.display = "flex";
     window.location.href = "index.html";
 }
 
@@ -189,10 +189,8 @@ async function modalOpen(targetId) {
             session.questions.forEach(q => {
     
                 const p = document.createElement("p");
-                p.innerHTML = `
-                Q${order}: ${q.question}<br>
-                A: ${q.response}
-                `;
+                p.textContent = `Q${order}: ${q.question}\nA: ${q.response}`;
+                p.style.whiteSpace = "pre-wrap";
                 content.appendChild(p);
                 order++;
                 if(parseInt(session.hintposition) === order){
@@ -372,7 +370,7 @@ loadInitialHistory();
 
 function loginCheck(){
     if(localStorage.getItem("account")){
-        document.getElementById("account").textContent = localStorage.getItem("account");
+        document.getElementById("account").textContent = "ログイン中";
     }
 }
 

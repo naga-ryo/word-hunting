@@ -1,4 +1,4 @@
-#loading3{
+#fundamental-loading{
     position: fixed;
     top: 0;
     left: 0;
@@ -49,7 +49,7 @@
     z-index: 10000;
 }
 
-.square-move-2 {
+.square-move {
     --size: 5vh;
     --color: currentColor;
     --animation-timing-function: linear;
@@ -59,8 +59,8 @@
     height: var(--size);
 }
 
-.square-move-2::before,
-.square-move-2::after {
+.square-move::before,
+.square-move::after {
     content: '';
     position: absolute;
     width: 50%;
@@ -68,21 +68,21 @@
     background-color: var(--color);
 }
 
-.square-move-2::before {
+.square-move::before {
     top: 0;
     left: 0;
     transform: translate(0%, 0%);
-    animation: var(--animation-timing-function) var(--animation-duration) infinite square-move-2-animation-before;
+    animation: var(--animation-timing-function) var(--animation-duration) infinite square-move-animation-before;
 }
 
-.square-move-2::after {
+.square-move::after {
     right: 0;
     bottom: 0;
     transform: translate(0%, 0%);
-    animation: var(--animation-timing-function) var(--animation-duration) infinite square-move-2-animation-after;
+    animation: var(--animation-timing-function) var(--animation-duration) infinite square-move-animation-after;
 }
 
-@keyframes square-move-2-animation-before {
+@keyframes square-move-animation-before {
     0% {
         transform: translate(0%, 0%);
     }
@@ -100,7 +100,7 @@
     }
 }
 
-@keyframes square-move-2-animation-after {
+@keyframes square-move-animation-after {
     0% {
         transform: translate(0%, 0%);
     }
