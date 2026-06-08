@@ -1,0 +1,15 @@
+{
+  "name": "ワードハンティング",
+  "short_name": "ワードハント",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1A2530",
+  "theme_color": "#1A2530",
+  "icons": [
+    {
+      "src": "images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

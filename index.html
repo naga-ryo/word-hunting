@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="css/dialog.css" />
     <link rel="stylesheet" href="css/loading.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1A2530">
+    <link rel="apple-touch-icon" href="images/icon-192x192.png">
   </head>
 
   <body>
@@ -151,5 +154,14 @@
     <script src="js/crow.js"></script>
     <script src="js/opinion.js"></script>
     <script src="js/script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('SW登録成功:', reg.scope))
+            .catch(err => console.log('SW登録失敗:', err));
+        });
+      }
+    </script>
   </body>
 </html>
